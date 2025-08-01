@@ -30,9 +30,34 @@
 }
 
 body {
-  background-color: hsl(var(--background));
+  background: linear-gradient(135deg, 
+    #e0e7ff 0%,     /* Lavanda muito suave */
+    #f0f9ff 25%,    /* Azul celeste muito claro */
+    #fefce8 50%,    /* Amarelo muito suave */
+    #f3e8ff 75%,    /* Roxo muito suave */
+    #e0e7ff 100%    /* Volta para lavanda */
+  );
+  min-height: 100vh;
   color: hsl(var(--foreground));
   font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* Garantir que o fundo cubra toda a tela */
+html, body, #root {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  background: linear-gradient(135deg, 
+    #e0e7ff 0%,     /* Lavanda muito suave */
+    #f0f9ff 25%,    /* Azul celeste muito claro */
+    #fefce8 50%,    /* Amarelo muito suave */
+    #f3e8ff 75%,    /* Roxo muito suave */
+    #e0e7ff 100%    /* Volta para lavanda */
+  );
+  min-height: 100vh;
 }
 
 /* Animações místicas */
@@ -54,7 +79,7 @@ body {
   animation: glow 2s ease-in-out infinite;
 }
 
-/* Gradientes místicos */
+/* Gradientes místicos para elementos */
 .bg-mystic-gradient {
   background: linear-gradient(135deg, 
     rgb(147, 51, 234) 0%, 
@@ -120,5 +145,24 @@ body {
   border-color: rgb(147, 51, 234);
   box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
   outline: none;
+}
+
+/* Correção específica para remover qualquer fundo amarelo forte */
+.bg-yellow-400, .bg-yellow-500, .bg-yellow-600 {
+  background: linear-gradient(135deg, 
+    #e0e7ff 0%, 
+    #f0f9ff 50%, 
+    #f3e8ff 100%) !important;
+}
+
+/* Garantir que o container principal tenha o fundo correto */
+.min-h-screen {
+  background: linear-gradient(135deg, 
+    #e0e7ff 0%,     /* Lavanda muito suave */
+    #f0f9ff 25%,    /* Azul celeste muito claro */
+    #fefce8 50%,    /* Amarelo muito suave */
+    #f3e8ff 75%,    /* Roxo muito suave */
+    #e0e7ff 100%    /* Volta para lavanda */
+  ) !important;
 }
 
