@@ -29,170 +29,213 @@
   border-color: hsl(var(--border));
 }
 
-/* Fundo místico suave e elegante */
-body {
+/* FUNDO PRINCIPAL - Gradiente suave e elegante */
+body, html, #root {
   background: linear-gradient(135deg, 
-    #f8fafc 0%,     /* Branco azulado muito suave */
-    #f1f5f9 25%,    /* Cinza azulado claro */
+    #f8fafc 0%,     /* Branco azulado */
+    #f1f5f9 25%,    /* Cinza muito claro */
     #fefce8 50%,    /* Amarelo muito suave */
-    #faf5ff 75%,    /* Roxo muito suave */
-    #f8fafc 100%    /* Volta para branco azulado */
-  );
-  min-height: 100vh;
-  color: #1e293b;  /* Texto escuro para boa legibilidade */
-  font-feature-settings: "rlig" 1, "calt" 1;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-/* Garantir que o fundo cubra toda a tela */
-html, body, #root {
+    #f3e8ff 75%,    /* Roxo muito suave */
+    #f8fafc 100%    /* Volta para branco */
+  ) !important;
   min-height: 100vh;
   margin: 0;
   padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-#root {
-  background: linear-gradient(135deg, 
-    #f8fafc 0%,     /* Branco azulado muito suave */
-    #f1f5f9 25%,    /* Cinza azulado claro */
-    #fefce8 50%,    /* Amarelo muito suave */
-    #faf5ff 75%,    /* Roxo muito suave */
-    #f8fafc 100%    /* Volta para branco azulado */
-  );
-  min-height: 100vh;
+/* TÍTULO PRINCIPAL - Contraste máximo */
+h1, .text-4xl, .text-5xl, .text-6xl, 
+[class*="text-4xl"], [class*="text-5xl"], [class*="text-6xl"] {
+  color: #0f172a !important;  /* Preto azulado - contraste máximo */
+  font-weight: 800 !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  letter-spacing: -0.025em !important;
+  line-height: 1.2 !important;
 }
 
-/* TÍTULO PRINCIPAL - Contraste forte e elegante */
-h1, .text-4xl, .text-5xl, .text-6xl {
-  color: #1e293b !important;  /* Cinza escuro para máximo contraste */
+/* SUBTÍTULO - Bem legível */
+h2, h3, .text-xl, .text-2xl, .text-3xl,
+[class*="text-xl"], [class*="text-2xl"], [class*="text-3xl"] {
+  color: #1e293b !important;  /* Cinza muito escuro */
   font-weight: 700 !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  letter-spacing: -0.025em;
 }
 
-/* SUBTÍTULOS - Boa legibilidade */
-h2, h3, .text-xl, .text-2xl, .text-3xl {
-  color: #334155 !important;  /* Cinza médio escuro */
-  font-weight: 600 !important;
+/* TEXTO DESCRITIVO - Contraste forte */
+p, .text-base, .text-sm, .text-lg, 
+[class*="text-base"], [class*="text-sm"], [class*="text-lg"] {
+  color: #334155 !important;  /* Cinza escuro */
+  line-height: 1.6 !important;
+  font-weight: 500 !important;
 }
 
-/* TEXTO DESCRITIVO - Legível mas suave */
-p, .text-base, .text-sm, .text-lg {
-  color: #475569 !important;  /* Cinza médio */
-  line-height: 1.6;
+/* CARD PRINCIPAL - Fundo branco puro com sombra */
+.card, .mystic-card, .bg-white, .bg-card,
+[class*="bg-white"], [class*="bg-card"] {
+  background: #ffffff !important;
+  border: 2px solid #e2e8f0 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1) !important;
+  padding: 32px !important;
+  margin: 20px auto !important;
+  max-width: 600px !important;
 }
 
-/* LABELS DOS FORMULÁRIOS - Contraste forte */
-label, .text-sm.font-medium {
-  color: #1e293b !important;  /* Escuro para máxima legibilidade */
-  font-weight: 600 !important;
-  font-size: 0.875rem !important;
-  margin-bottom: 0.5rem !important;
+/* TÍTULO DO CARD - Destaque forte */
+.card h2, .card h3, .mystic-card h2, .mystic-card h3,
+[class*="card"] h2, [class*="card"] h3 {
+  color: #0f172a !important;  /* Preto azulado */
+  font-weight: 700 !important;
+  font-size: 1.5rem !important;
+  margin-bottom: 16px !important;
+  text-align: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+
+/* LABELS - CONTRASTE MÁXIMO */
+label, .label, .text-sm.font-medium,
+[class*="label"], [class*="font-medium"] {
+  color: #000000 !important;  /* PRETO PURO - máximo contraste */
+  font-weight: 700 !important;  /* Peso extra forte */
+  font-size: 0.95rem !important;  /* Tamanho maior */
+  margin-bottom: 8px !important;
   display: block !important;
+  text-transform: none !important;
+  letter-spacing: 0.025em !important;
 }
 
-/* INPUTS - Fundo branco com bordas definidas */
-input, textarea, select {
-  background: #ffffff !important;  /* Fundo branco puro */
-  border: 2px solid #e2e8f0 !important;  /* Borda cinza clara */
+/* INPUTS - Fundo branco com bordas escuras */
+input, textarea, select,
+[type="text"], [type="email"], [type="date"], [type="time"] {
+  background: #ffffff !important;
+  border: 2px solid #334155 !important;  /* Borda escura */
   border-radius: 8px !important;
-  padding: 12px 16px !important;
-  color: #1e293b !important;  /* Texto escuro */
-  font-size: 0.875rem !important;
+  padding: 14px 16px !important;
+  color: #0f172a !important;  /* Texto preto */
+  font-size: 1rem !important;
+  font-weight: 500 !important;
   transition: all 0.2s ease !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
 }
 
-/* INPUTS EM FOCO - Destaque roxo místico */
+/* INPUTS EM FOCO - Destaque roxo */
 input:focus, textarea:focus, select:focus {
-  border-color: #8b5cf6 !important;  /* Roxo místico */
-  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
+  border-color: #7c3aed !important;  /* Roxo místico */
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2) !important;
   outline: none !important;
   background: #ffffff !important;
 }
 
 /* PLACEHOLDER - Contraste adequado */
 input::placeholder, textarea::placeholder {
-  color: #94a3b8 !important;  /* Cinza médio claro */
+  color: #64748b !important;  /* Cinza médio */
   opacity: 1 !important;
+  font-weight: 400 !important;
 }
 
-/* BOTÃO PRINCIPAL - Gradiente místico com contraste */
-button, .btn, .button {
-  background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%) !important;
+/* BOTÃO PRINCIPAL - Gradiente místico forte */
+button, .btn, .button,
+[class*="btn"], [class*="button"] {
+  background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%) !important;
   color: #ffffff !important;
   border: none !important;
-  padding: 14px 28px !important;
-  border-radius: 10px !important;
-  font-weight: 600 !important;
-  font-size: 1rem !important;
+  padding: 16px 32px !important;
+  border-radius: 12px !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
   cursor: pointer !important;
   transition: all 0.3s ease !important;
-  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.3) !important;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+  width: 100% !important;
+  margin-top: 20px !important;
 }
 
-/* BOTÃO EM HOVER - Efeito elegante */
+/* BOTÃO EM HOVER */
 button:hover, .btn:hover, .button:hover {
   transform: translateY(-2px) !important;
-  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4) !important;
-  background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%) !important;
+  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.5) !important;
+  background: linear-gradient(135deg, #6d28d9 0%, #2563eb 100%) !important;
 }
 
-/* CARDS DE RESULTADOS - Fundo branco com sombra suave */
-.mystic-card, .card, .bg-white {
-  background: #ffffff !important;
-  border: 1px solid #e2e8f0 !important;
-  border-radius: 12px !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
-  padding: 24px !important;
+/* TEXTO MUTED - Ainda legível */
+.text-muted-foreground, .text-muted, .muted,
+[class*="text-muted"], [class*="muted"] {
+  color: #475569 !important;  /* Cinza escuro legível */
+  font-weight: 500 !important;
+}
+
+/* TEXTO SECUNDÁRIO - Bem contrastado */
+.text-gray-600, .text-gray-500, .text-gray-700,
+[class*="text-gray"] {
+  color: #374151 !important;  /* Cinza escuro */
+  font-weight: 500 !important;
+}
+
+/* GRID DE CAMPOS - Layout melhorado */
+.grid, .grid-cols-2, [class*="grid"] {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 20px !important;
   margin-bottom: 20px !important;
 }
 
-/* TÍTULOS DOS CARDS - Destaque místico */
-.card h3, .mystic-card h3, .card h2, .mystic-card h2 {
-  color: #7c3aed !important;  /* Roxo místico */
-  font-weight: 700 !important;
-  font-size: 1.25rem !important;
-  margin-bottom: 12px !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px !important;
+/* CAMPO INDIVIDUAL */
+.space-y-2 > *, .form-field, .field {
+  margin-bottom: 20px !important;
 }
 
-/* CONTEÚDO DOS CARDS - Legibilidade perfeita */
-.card p, .mystic-card p, .card div, .mystic-card div {
-  color: #374151 !important;  /* Cinza escuro */
-  line-height: 1.6 !important;
-  margin-bottom: 8px !important;
+/* RESPONSIVIDADE - Mobile */
+@media (max-width: 768px) {
+  .grid, .grid-cols-2 {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  
+  .card, .mystic-card {
+    padding: 20px !important;
+    margin: 16px !important;
+  }
+  
+  h1, .text-4xl, .text-5xl, .text-6xl {
+    font-size: 2rem !important;
+  }
+  
+  button, .btn, .button {
+    padding: 14px 24px !important;
+    font-size: 1rem !important;
+  }
 }
 
-/* DESTAQUES ESPECIAIS - Texto em destaque */
-.highlight, .font-semibold, .font-bold {
-  color: #1e293b !important;
-  font-weight: 600 !important;
+/* FOOTER - Legível */
+footer, .footer, [class*="footer"] {
+  color: #475569 !important;
+  font-size: 0.875rem !important;
+  text-align: center !important;
+  padding: 24px !important;
+  font-weight: 500 !important;
 }
 
-/* ÍCONES E EMOJIS - Tamanho adequado */
-.icon, .emoji {
+/* ÍCONES E EMOJIS */
+.icon, .emoji, [class*="icon"] {
   font-size: 1.5rem !important;
   margin-right: 8px !important;
 }
 
-/* ANIMAÇÕES MÍSTICAS SUAVES */
+/* ANIMAÇÕES SUAVES */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
+  50% { transform: translateY(-6px); }
 }
 
 @keyframes glow {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-
-@keyframes shimmer {
-  0% { background-position: -200px 0; }
-  100% { background-position: calc(200px + 100%) 0; }
+  50% { opacity: 0.8; }
 }
 
 .animate-float {
@@ -203,107 +246,77 @@ button:hover, .btn:hover, .button:hover {
   animation: glow 3s ease-in-out infinite;
 }
 
-/* RESPONSIVIDADE - Mobile first */
-@media (max-width: 768px) {
-  h1, .text-4xl, .text-5xl, .text-6xl {
-    font-size: 2rem !important;
-    line-height: 1.2 !important;
-  }
-  
-  .card, .mystic-card {
-    padding: 16px !important;
-    margin-bottom: 16px !important;
-  }
-  
-  button, .btn, .button {
-    padding: 12px 24px !important;
-    font-size: 0.875rem !important;
-  }
-}
-
-/* ACESSIBILIDADE - Alto contraste */
-@media (prefers-contrast: high) {
-  body {
-    background: #ffffff !important;
-  }
-  
-  h1, h2, h3, label {
-    color: #000000 !important;
-  }
-  
-  input, textarea, select {
-    border: 3px solid #000000 !important;
-  }
-}
-
-/* MODO ESCURO - Se necessário */
-@media (prefers-color-scheme: dark) {
-  body {
-    background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #1e293b 100%) !important;
-    color: #f8fafc !important;
-  }
-  
-  h1, h2, h3, label {
-    color: #f8fafc !important;
-  }
-  
-  input, textarea, select {
-    background: #334155 !important;
-    border-color: #475569 !important;
-    color: #f8fafc !important;
-  }
-  
-  .card, .mystic-card {
-    background: #334155 !important;
-    border-color: #475569 !important;
-  }
-}
-
 /* CORREÇÕES ESPECÍFICAS PARA ELEMENTOS PROBLEMÁTICOS */
-.text-muted-foreground {
-  color: #64748b !important;  /* Cinza médio com bom contraste */
+
+/* Garantir que todos os textos tenham contraste adequado */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.text-gray-600 {
-  color: #475569 !important;  /* Cinza escuro para melhor legibilidade */
-}
-
-.text-gray-500 {
-  color: #64748b !important;  /* Cinza médio */
-}
-
-.text-gray-400 {
-  color: #94a3b8 !important;  /* Cinza claro mas ainda legível */
-}
-
-/* GARANTIR QUE NENHUM ELEMENTO TENHA FUNDO AMARELO FORTE */
-.bg-yellow-100, .bg-yellow-200, .bg-yellow-300, .bg-yellow-400, .bg-yellow-500 {
+/* Remover qualquer fundo colorido problemático */
+.bg-yellow-100, .bg-yellow-200, .bg-yellow-300, 
+.bg-blue-100, .bg-blue-200, .bg-purple-100,
+[class*="bg-yellow"], [class*="bg-blue"], [class*="bg-purple"] {
   background: #ffffff !important;
   border: 1px solid #e2e8f0 !important;
 }
 
-/* MELHORAR CONTRASTE DE LINKS */
-a, .link {
+/* Links com contraste forte */
+a, .link, [class*="link"] {
   color: #7c3aed !important;
   text-decoration: underline !important;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
 }
 
 a:hover, .link:hover {
   color: #5b21b6 !important;
 }
 
-/* FOOTER E ELEMENTOS SECUNDÁRIOS */
-footer, .footer {
-  color: #64748b !important;
-  font-size: 0.875rem !important;
-  text-align: center !important;
+/* Garantir que elementos com classes específicas tenham contraste */
+.text-foreground {
+  color: #0f172a !important;
+}
+
+.text-muted-foreground {
+  color: #475569 !important;
+}
+
+/* Espaçamentos adequados */
+.space-y-4 > * + * {
+  margin-top: 1rem !important;
+}
+
+.space-y-2 > * + * {
+  margin-top: 0.5rem !important;
+}
+
+/* Container principal */
+.container, .max-w-md, .mx-auto {
+  max-width: 600px !important;
+  margin: 0 auto !important;
   padding: 20px !important;
 }
 
-/* GARANTIR LEGIBILIDADE EM TODOS OS ELEMENTOS */
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Garantir que o card seja sempre visível */
+.bg-card {
+  background: #ffffff !important;
+  color: #0f172a !important;
+}
+
+/* Texto do card sempre escuro */
+.bg-card * {
+  color: inherit !important;
+}
+
+/* Labels sempre pretas */
+.bg-card label {
+  color: #000000 !important;
+}
+
+/* Inputs sempre com fundo branco */
+.bg-card input {
+  background: #ffffff !important;
+  color: #0f172a !important;
 }
 
