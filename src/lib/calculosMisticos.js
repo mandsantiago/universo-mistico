@@ -456,4 +456,3 @@ export function calcularUniversoMistico(dados) {
     return null
   }
 }
-
