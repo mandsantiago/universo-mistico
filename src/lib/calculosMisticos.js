@@ -119,7 +119,7 @@ const ANIMAIS_CHINESES = [
 ]
 
 const ELEMENTOS_CHINESES = [
-  { nome: 'Madeira', descricao: 'Crescimento, flexibilidade e vitalidade. Você tem uma energia expansiva e criativa.' },
+  { nome: 'Madeira', descricao: 'Crescimento, flexibilidade e vitalidade. Você tem uma energia expansiva e creativa.' },
   { nome: 'Fogo', descricao: 'Energia, transformação e dinamismo. Você possui paixão e capacidade de inspirar outros.' },
   { nome: 'Terra', descricao: 'Estabilidade, nutrição e centro. Você é uma pessoa equilibrada e confiável.' },
   { nome: 'Metal', descricao: 'Força, clareza e transformação. Você tem determinação e capacidade de foco.' },
@@ -205,27 +205,29 @@ function calcularValorNome(nome, somenteVogais = false, somenteConsoantes = fals
 export function calcularNumerologia(nomeCompleto, dataNascimento) {
   const data = new Date(dataNascimento)
   
-  // CORREÇÃO: Número do Destino (Caminho de Vida) - somar TODOS os dígitos da data
+  // CORREÇÃO: Cálculo correto do Número do Destino (Caminho de Vida)
   const dia = data.getDate()
   const mes = data.getMonth() + 1
   const ano = data.getFullYear()
   
-  // Somar todos os dígitos individualmente
-  let somaData = 0
-  
-  // Somar dígitos do dia
-  somaData += Math.floor(dia / 10) + (dia % 10)
-  
-  // Somar dígitos do mês
-  somaData += Math.floor(mes / 10) + (mes % 10)
-  
-  // Somar dígitos do ano
-  const anoStr = ano.toString()
-  for (let i = 0; i < anoStr.length; i++) {
-    somaData += parseInt(anoStr[i])
+  // Função para reduzir um número a um único dígito (exceto números mestres)
+  const reduzirData = (num) => {
+    if (num === 11 || num === 22 || num === 33) return num
+    let n = num
+    while (n > 9) {
+      n = n.toString().split('').reduce((sum, digit) => sum + parseInt(digit), 0)
+    }
+    return n
   }
   
-  const numeroDestino = reduzirNumero(somaData)
+  // Reduzir cada componente individualmente
+  const diaReduzido = reduzirData(dia)
+  const mesReduzido = reduzirData(mes)
+  const anoReduzido = reduzirData(ano)
+  
+  // Soma dos componentes reduzidos
+  const somaTotal = diaReduzido + mesReduzido + anoReduzido
+  const numeroDestino = reduzirData(somaTotal)
   
   // Número da Alma (vogais do nome)
   const numeroAlma = calcularValorNome(nomeCompleto, true, false)
@@ -333,36 +335,56 @@ const ANJOS_CABALISTICOS = [
   { nome: 'Mumiah', datas: ['30/05', '11/08', '23/10', '04/01', '18/03'], atributos: 'Renascimento', mensagem: 'Cada fim é um novo começo, cada morte é um renascimento.' }
 ]
 
-// FUNÇÃO CORRIGIDA - Anjo da Guarda
+// FUNÇÃO CORRIGIDA - Anjo da Guarda baseado no Número do Destino
 export function calcularAnjoGuardiao(dataNascimento) {
   const data = new Date(dataNascimento)
-  const dia = String(data.getDate()).padStart(2, '0')
-  const mes = String(data.getMonth() + 1).padStart(2, '0')
-  const dataFormatada = `${dia}/${mes}`
+  const dia = data.getDate()
+  const mes = data.getMonth() + 1
+  const ano = data.getFullYear()
   
-  console.log('Data formatada para busca:', dataFormatada) // Debug
-  
-  // Verificar se é um "Gênio da Humanidade"
-  const geniosHumanidade = ['05/01', '19/03', '31/05', '12/08', '24/10']
-  if (geniosHumanidade.includes(dataFormatada)) {
-    return {
-      nome: 'Gênio da Humanidade',
-      atributos: 'Essência angelical universal',
-      mensagem: 'Você é protegido pela poderosa essência angelical universal. Sua alma carrega a sabedoria de vidas passadas e tem uma missão especial na Terra.'
+  // Função para reduzir um número a um único dígito (exceto números mestres)
+  const reduzirData = (num) => {
+    if (num === 11 || num === 22 || num === 33) return num
+    let n = num
+    while (n > 9) {
+      n = n.toString().split('').reduce((sum, digit) => sum + parseInt(digit), 0)
     }
+    return n
   }
   
-  // Encontrar o anjo correspondente
-  for (const anjo of ANJOS_CABALISTICOS) {
-    if (anjo.datas.includes(dataFormatada)) {
-      console.log('Anjo encontrado:', anjo.nome) // Debug
-      return anjo
-    }
+  // Reduzir cada componente individualmente
+  const diaReduzido = reduzirData(dia)
+  const mesReduzido = reduzirData(mes)
+  const anoReduzido = reduzirData(ano)
+  
+  // Soma dos componentes reduzidos
+  const somaTotal = diaReduzido + mesReduzido + anoReduzido
+  const numeroDestino = reduzirData(somaTotal)
+  
+  // Mapeamento correto dos anjos por número do destino
+  const ANJOS_POR_DESTINO = {
+    1: "Vehuiah",
+    2: "Jeliel",
+    3: "Sitael",
+    4: "Elemiah",
+    5: "Mahasiah",
+    6: "Yesalel",
+    7: "Mebahel",  // CORREÇÃO: Número 7 -> Mebahel
+    8: "Hariel",
+    9: "Hekamiah"
   }
   
-  console.log('Nenhum anjo encontrado, usando fallback') // Debug
-  // Fallback para o primeiro anjo se não encontrar
-  return ANJOS_CABALISTICOS[0]
+  // Criar um mapa de anjos pelo nome
+  const MAPA_ANJOS_POR_NOME = {}
+  ANJOS_CABALISTICOS.forEach(anjo => {
+    MAPA_ANJOS_POR_NOME[anjo.nome] = anjo
+  })
+  
+  // Obter o anjo correspondente
+  const nomeAnjo = ANJOS_POR_DESTINO[numeroDestino] || "Vehuiah"
+  const anjo = MAPA_ANJOS_POR_NOME[nomeAnjo]
+  
+  return anjo || ANJOS_CABALISTICOS[0]
 }
 
 // ===== TARÔ =====
@@ -437,7 +459,7 @@ export function calcularUniversoMistico(dados) {
     
     const astrologiaChinesa = calcularAstrologiaChinesa(dataNascimento)
     const numerologia = calcularNumerologia(nome, dataNascimento)
-    const anjoGuardiao = calcularAnjoGuardiao(dataNascimento)
+    const anjoGuardiao = calcularAnjoGuardiao(dataNascimento)  // Já usa o cálculo corrigido
     const taroNascimento = calcularTaroNascimento(dataNascimento)
     
     return {
