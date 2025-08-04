@@ -1,4 +1,4 @@
-// Cálculos Místicos - Astrologia, Numerologia e Espiritualidade
+// Cálculos Místicos CORRIGIDOS - Astrologia, Numerologia e Espiritualidade
 
 // ===== ASTROLOGIA OCIDENTAL =====
 
@@ -153,7 +153,7 @@ export function calcularAstrologiaChinesa(dataNascimento) {
   }
 }
 
-// ===== NUMEROLOGIA =====
+// ===== NUMEROLOGIA CORRIGIDA =====
 
 const TABELA_NUMEROLOGICA = {
   'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7, 'H': 8, 'I': 9,
@@ -201,14 +201,30 @@ function calcularValorNome(nome, somenteVogais = false, somenteConsoantes = fals
   return reduzirNumero(soma)
 }
 
+// FUNÇÃO CORRIGIDA - Número do Destino
 export function calcularNumerologia(nomeCompleto, dataNascimento) {
   const data = new Date(dataNascimento)
   
-  // Número do Destino (Caminho de Vida)
+  // CORREÇÃO: Número do Destino (Caminho de Vida) - somar TODOS os dígitos da data
   const dia = data.getDate()
   const mes = data.getMonth() + 1
   const ano = data.getFullYear()
-  const somaData = dia + mes + ano.toString().split('').reduce((sum, digit) => sum + parseInt(digit), 0)
+  
+  // Somar todos os dígitos individualmente
+  let somaData = 0
+  
+  // Somar dígitos do dia
+  somaData += Math.floor(dia / 10) + (dia % 10)
+  
+  // Somar dígitos do mês
+  somaData += Math.floor(mes / 10) + (mes % 10)
+  
+  // Somar dígitos do ano
+  const anoStr = ano.toString()
+  for (let i = 0; i < anoStr.length; i++) {
+    somaData += parseInt(anoStr[i])
+  }
+  
   const numeroDestino = reduzirNumero(somaData)
   
   // Número da Alma (vogais do nome)
@@ -240,7 +256,7 @@ export function calcularNumerologia(nomeCompleto, dataNascimento) {
   }
 }
 
-// ===== ANJOS CABALÍSTICOS =====
+// ===== ANJOS CABALÍSTICOS CORRIGIDOS =====
 
 const ANJOS_CABALISTICOS = [
   { nome: 'Vehuiah', datas: ['20/03', '01/06', '13/08', '25/10', '06/01'], atributos: 'Vontade divina e novos começos', mensagem: 'Confie em sua força interior para iniciar novos projetos.' },
@@ -317,11 +333,14 @@ const ANJOS_CABALISTICOS = [
   { nome: 'Mumiah', datas: ['30/05', '11/08', '23/10', '04/01', '18/03'], atributos: 'Renascimento', mensagem: 'Cada fim é um novo começo, cada morte é um renascimento.' }
 ]
 
+// FUNÇÃO CORRIGIDA - Anjo da Guarda
 export function calcularAnjoGuardiao(dataNascimento) {
   const data = new Date(dataNascimento)
   const dia = String(data.getDate()).padStart(2, '0')
   const mes = String(data.getMonth() + 1).padStart(2, '0')
   const dataFormatada = `${dia}/${mes}`
+  
+  console.log('Data formatada para busca:', dataFormatada) // Debug
   
   // Verificar se é um "Gênio da Humanidade"
   const geniosHumanidade = ['05/01', '19/03', '31/05', '12/08', '24/10']
@@ -336,10 +355,12 @@ export function calcularAnjoGuardiao(dataNascimento) {
   // Encontrar o anjo correspondente
   for (const anjo of ANJOS_CABALISTICOS) {
     if (anjo.datas.includes(dataFormatada)) {
+      console.log('Anjo encontrado:', anjo.nome) // Debug
       return anjo
     }
   }
   
+  console.log('Nenhum anjo encontrado, usando fallback') // Debug
   // Fallback para o primeiro anjo se não encontrar
   return ANJOS_CABALISTICOS[0]
 }
