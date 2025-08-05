@@ -107,7 +107,7 @@ const ANIMAIS_CHINESES = [
   { nome: 'Cabra', yin_yang: 'Yin', descricao: 'Criativo, gentil e compassivo. Você tem uma sensibilidade artística e empatia natural.' },
   { nome: 'Macaco', yin_yang: 'Yang', descricao: 'Inteligente, espirituoso e versátil. Você tem uma mente ágil e senso de humor único.' },
   { nome: 'Galo', yin_yang: 'Yin', descricao: 'Observador, trabalhador e corajoso. Você tem um senso de justiça forte e é muito confiável.' },
-  { nome: 'Cão', yin_yang: 'Yang', descricao: 'Leal, responsável e confiável. Você é um amigo verdadeiro e protetor natural.' },
+  { nome: 'Cão', yin_yang: 'Yang', descricao: 'Leal, responsável e confiável. Você é um amigo verdadeiro e protecto natural.' },
   { nome: 'Porco', yin_yang: 'Yin', descricao: 'Compassivo, generoso e diligente. Você tem um coração grande e natureza altruísta.' }
 ];
 
@@ -143,7 +143,8 @@ export function calcularAstrologiaChinesa(dataNascimento) {
   };
 }
 
-// ===== FUNÇÕES AUXILIARES NUMEROLÓGICAS =====
+// ===== NUMEROLOGIA CORRIGIDA =====
+
 const TABELA_NUMEROLOGICA = {
   'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7, 'H': 8, 'I': 9,
   'J': 1, 'K': 2, 'L': 3, 'M': 4, 'N': 5, 'O': 6, 'P': 7, 'Q': 8, 'R': 9,
@@ -168,7 +169,7 @@ const SIGNIFICADOS_NUMEROLOGICOS = {
 };
 
 function reduzirNumeroCompleto(numero) {
-  while (numero > 9 && ![11, 22, 33].includes(numero)) {
+  while (numero > 9 && numero !== 11 && numero !== 22 && numero !== 33) {
     numero = [...numero.toString()].reduce((sum, digit) => sum + parseInt(digit), 0);
   }
   return numero;
@@ -190,17 +191,17 @@ function calcularValorNome(nome, somenteVogais = false, somenteConsoantes = fals
   return reduzirNumeroCompleto(soma);
 }
 
-// ===== CÁLCULO DO NÚMERO DO DESTINO CORRIGIDO =====
+// FUNÇÃO TOTALMENTE REFATORADA - Número do Destino
 function calcularNumeroDestino(dataNascimento) {
   const data = new Date(dataNascimento);
   const dia = data.getDate();
   const mes = data.getMonth() + 1;
   const ano = data.getFullYear();
   
-  // Função de redução correta
+  // Função de redução segura
   const reduzirComponente = (num) => {
     let n = num;
-    while (n > 9) {
+    while (n > 9 && ![11, 22, 33].includes(n)) {
       n = [...n.toString()].reduce((sum, digit) => sum + parseInt(digit), 0);
     }
     return n;
@@ -209,14 +210,15 @@ function calcularNumeroDestino(dataNascimento) {
   // Reduzir cada componente individualmente
   const diaReduzido = reduzirComponente(dia);
   const mesReduzido = reduzirComponente(mes);
-  const anoReduzido = reduzirComponente([...ano.toString()].reduce((sum, digit) => sum + parseInt(digit), 0));
+  const anoReduzido = reduzirComponente(
+    [...ano.toString()].reduce((sum, digit) => sum + parseInt(digit), 0)
+  );
   
   // Soma final e redução
   const somaTotal = diaReduzido + mesReduzido + anoReduzido;
   return reduzirComponente(somaTotal);
 }
 
-// ===== NUMEROLOGIA CORRIGIDA =====
 export function calcularNumerologia(nomeCompleto, dataNascimento) {
   const numeroDestino = calcularNumeroDestino(dataNascimento);
   
@@ -245,6 +247,7 @@ export function calcularNumerologia(nomeCompleto, dataNascimento) {
 }
 
 // ===== ANJOS CABALÍSTICOS CORRIGIDOS =====
+
 const ANJOS_POR_NUMERO_DESTINO = {
   1: { 
     nome: 'Vehuiah', 
@@ -301,6 +304,7 @@ export function calcularAnjoGuardiao(dataNascimento) {
 }
 
 // ===== TARÔ =====
+
 const ARCANOS_MAIORES = [
   { numero: 0, nome: 'O Louco', descricao: 'Novos começos, espontaneidade e fé no desconhecido.' },
   { numero: 1, nome: 'O Mago', descricao: 'Manifestação, poder pessoal e habilidade para criar a realidade.' },
@@ -332,10 +336,10 @@ export function calcularTaroNascimento(dataNascimento) {
   const mes = data.getMonth() + 1;
   const ano = data.getFullYear();
   
-  let soma = dia + mes + ano.toString().split('').reduce((sum, digit) => sum + parseInt(digit), 0);
+  let soma = dia + mes + [...ano.toString()].reduce((sum, digit) => sum + parseInt(digit), 0);
   
   while (soma > 22) {
-    soma = soma.toString().split('').reduce((sum, digit) => sum + parseInt(digit), 0);
+    soma = [...soma.toString()].reduce((sum, digit) => sum + parseInt(digit), 0);
   }
   
   if (soma === 22) soma = 0;
@@ -344,7 +348,7 @@ export function calcularTaroNascimento(dataNascimento) {
   
   let somaPersonalidade = soma;
   if (soma > 9) {
-    somaPersonalidade = soma.toString().split('').reduce((sum, digit) => sum + parseInt(digit), 0);
+    somaPersonalidade = [...soma.toString()].reduce((sum, digit) => sum + parseInt(digit), 0);
   }
   
   const cartaPersonalidade = ARCANOS_MAIORES.find(arcano => arcano.numero === somaPersonalidade) || cartaNascimento;
@@ -356,6 +360,7 @@ export function calcularTaroNascimento(dataNascimento) {
 }
 
 // ===== FUNÇÃO PRINCIPAL =====
+
 export function calcularUniversoMistico(dados) {
   const { nome, dataNascimento, horaNascimento, cidade, pais } = dados;
   
